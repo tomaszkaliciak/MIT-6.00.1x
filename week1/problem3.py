@@ -9,7 +9,4 @@ for n in range(len(s) - 1):
             result = temp
         temp = s[n+1]
 
-if len(temp) > len(result):
-    result = temp
-
 print("Longest substring in alphabetical order is: ", result)
