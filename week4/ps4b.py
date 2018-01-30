@@ -130,20 +130,21 @@ def playGame(wordList):
         answer2 = ""
         while answer1 not in ('n', 'r', 'e'):
             answer1 = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
-
+            if answer1 not in ('n', 'r', 'e'):
+                print("Invalid command.")
         if answer1 == 'e':
             break
 
-        while answer2 not in ('u', 'c'):
+        while answer2 not in ('u', 'c') and (answer1 == 'n' or len(hand) > 0):
             answer2 = input("Enter u to have yourself play, c to have the computer play: ")
-
+            if answer2 not in ('u', 'c'):
+                print("Invalid command.")
         if answer1 == 'n':
             hand = dealHand(HAND_SIZE)
-        else:
+        elif answer1 == 'r':
             if len(hand) == 0:
                 print("You have not played a hand yet. Please play a new hand first!")
                 continue
-
         if answer2 == 'u':
             playHand(hand, wordList, HAND_SIZE)
         elif answer2 == 'c':
