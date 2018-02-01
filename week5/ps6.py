@@ -229,22 +229,22 @@ class CiphertextMessage(Message):
         '''
         bestResult = 0
         bestShift = 0
-        guess = PlaintextMessage(self.message_text, 0)
-        iter = 0
+        bestMsg = ''
+
         for shift in range(26):
             currentResult = 0
-            guess.change_shift(iter)
-            listOfWords = guess.get_message_text_encrypted().split()
+            msg = self.apply_shift(shift)
+            listOfWords = msg.split()
             for word in listOfWords:
                 if is_word(self.valid_words, word):
                     currentResult += 1
             if currentResult > bestResult:
                 bestResult = currentResult
-                bestShift = iter
-            iter += 1
-        guess1 = PlaintextMessage(self.message_text, bestShift)
+                bestShift = shift
 
-        return bestShift, guess1.get_message_text_encrypted()
+        bestMsg = self.apply_shift(bestShift)
+
+        return bestShift, bestMsg
 
 
 def decrypt_story():
